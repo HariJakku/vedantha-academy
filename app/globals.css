@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-nunito: 'Nunito', system-ui, sans-serif;
+  --font-jetbrains: 'JetBrains Mono', monospace;
+
+  --navy:  #0f1b4c;
+  --deep:  #16245c;
+  --blue:  #1e3a8a;
+  --gold:  #c9962c;
+  --cream: #fdfaf4;
+  --warm:  #f5f0e8;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 99px; }
+
+/* ── Base ── */
+html { scroll-behavior: smooth; }
+body { background-color: var(--cream); }
+
+/* ── Typography ── */
+.font-heading { font-family: var(--font-playfair); }
+.font-body    { font-family: var(--font-nunito); }
+
+/* ── Utility classes ── */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-academy-gold text-white font-semibold
+           px-6 py-3 rounded-xl transition-all duration-300
+           hover:bg-yellow-600 hover:shadow-lg hover:-translate-y-0.5 active:scale-95;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border-2 border-academy-navy text-academy-navy
+           font-semibold px-6 py-3 rounded-xl transition-all duration-300
+           hover:bg-academy-navy hover:text-white hover:-translate-y-0.5 active:scale-95;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 text-academy-navy font-semibold
+           px-4 py-2 rounded-lg transition-all duration-200
+           hover:bg-academy-navy/10 active:scale-95;
+  }
+
+  .section-title {
+    @apply font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-academy-navy leading-tight;
+  }
+  .section-subtitle {
+    @apply text-lg text-gray-600 font-body leading-relaxed;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100
+           hover:shadow-md transition-shadow duration-300;
+  }
+  .card-glass {
+    @apply bg-white/80 backdrop-blur-md rounded-2xl border border-white/60 shadow-xl;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+  }
+  .badge-gold  { @apply badge bg-yellow-100 text-yellow-800; }
+  .badge-navy  { @apply badge bg-blue-100 text-blue-800; }
+  .badge-green { @apply badge bg-green-100 text-green-800; }
+  .badge-red   { @apply badge bg-red-100 text-red-800; }
+
+  .input {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-xl font-body text-sm
+           bg-white focus:outline-none focus:ring-2 focus:ring-academy-gold/40
+           focus:border-academy-gold transition-colors placeholder:text-gray-400;
+  }
+  .label {
+    @apply block text-sm font-semibold text-gray-700 mb-1.5;
+  }
+
+  .nav-link {
+    @apply relative text-sm font-semibold text-gray-700 hover:text-academy-navy
+           transition-colors duration-200 py-1;
+  }
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-academy-gold rounded-full
+           transition-all duration-300;
+  }
+  .nav-link:hover::after { @apply w-full; }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, #0f1b4c 0%, #1e3a8a 50%, #1e40af 100%);
+  }
+  .gold-gradient {
+    background: linear-gradient(135deg, #c9962c 0%, #f59e0b 50%, #c9962c 100%);
+  }
+
+  .page-hero {
+    @apply relative bg-academy-navy text-white py-20 md:py-28 overflow-hidden;
+  }
+  .page-hero::before {
+    content: '';
+    @apply absolute inset-0;
+    background-image: radial-gradient(circle at 20% 60%, rgba(201,150,44,0.15) 0%, transparent 55%),
+                      radial-gradient(circle at 80% 40%, rgba(59,130,246,0.12) 0%, transparent 55%),
+                      radial-gradient(circle at 50% 100%, rgba(30,58,138,0.4) 0%, transparent 60%);
+  }
+  .page-hero-inner {
+    @apply relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center;
+  }
+
+  .stat-card {
+    @apply text-center p-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20;
+  }
+
+  .table-th {
+    @apply px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50;
+  }
+  .table-td {
+    @apply px-4 py-3 text-sm text-gray-700 border-b border-gray-50;
+  }
+}
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-10px) rotate(1deg); }
+  66%       { transform: translateY(-5px) rotate(-1deg); }
+}
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,150,44,0); }
+  50%       { box-shadow: 0 0 20px 4px rgba(201,150,44,0.25); }
+}
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-fade-in-up  { animation: fadeInUp  0.6s ease-out forwards; }
+.animate-fade-in-left { animation: fadeInLeft 0.6s ease-out forwards; }
+.animate-scale-in    { animation: scaleIn   0.5s ease-out forwards; }
+.animate-float       { animation: float 6s ease-in-out infinite; }
+.animate-marquee     { animation: marquee 30s linear infinite; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* ── Shimmer skeleton ── */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ── Marquee ticker ── */
+.ticker-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-content {
+  display: inline-block;
+  animation: marquee 35s linear infinite;
+}
+.ticker-content:hover { animation-play-state: paused; }
+
+/* ── Prose ── */
+.prose-academy {
+  @apply text-gray-700 leading-relaxed;
+}
+.prose-academy p { @apply mb-4; }
+.prose-academy ul { @apply list-disc list-inside mb-4 space-y-1; }
+.prose-academy li { @apply text-gray-600; }
+
+/* ── Print ── */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+}
