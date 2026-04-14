@@ -1,5 +1,5 @@
 "use client";
-
+export const dynamic = "force-dynamic";
 import HeroSection from "@/components/home/HeroSection";
 import StatsSection from "@/components/home/StatsSection";
 import ChiefMentorMessage from "@/components/home/CheifMentorMessage";
