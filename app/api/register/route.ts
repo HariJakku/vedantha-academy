@@ -1,13 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
-
-// Use service role to bypass RLS for profile creation during registration
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
+export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
+  // Initialize client inside handler to prevent error during build phase in Vercel.
+  const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+  );
   try {
     const body = await request.json();
     const {
